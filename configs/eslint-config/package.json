@@ -1,0 +1,14 @@
+{
+    "name": "@theme-toggles/eslint-config",
+    "version": "0.0.0",
+    "private": true,
+    "main": "index.js",
+    "dependencies": {
+        "@typescript-eslint/parser": "^7.7.1",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-config-turbo": "^1.13.2",
+        "eslint-plugin-astro": "^1.0.3",
+        "eslint-plugin-jsx-a11y": "^6.8.0",
+        "eslint-plugin-react": "7.34.1"
+    }
+}

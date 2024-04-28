@@ -1,0 +1,19 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(half-sun)};
+
+@include generic(half-sun, flip-x);
+
+.theme-toggle__half-sun {
+  path {
+    transform-origin: center;
+    transition: transform var($variable) ease;
+  }
+}
+
+@include toggledSelector(half-sun) {
+  path {
+    transform: rotate(180deg);
+  }
+}

@@ -1,0 +1,66 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(around)};
+
+@include generic(around, flip-y);
+
+
+.theme-toggle__around {
+  * {
+    transform-origin: center;
+    transition: transform calc(var($variable) * 0.6) ease;
+  }
+  > g {
+    g {
+      circle {
+        transition-duration: calc(var($variable) * 0.2);
+      }
+      @for $i from 1 through 6 {
+        :nth-child(#{$i}) {
+          transition-delay: calc(var(#{$variable}) *#{$i * 0.095 + 0.158});
+        }
+      }
+    }
+  }
+  > *:first-child {
+    path {
+      transition-property: transform, d;
+    }
+  }
+}
+
+@include toggledSelector(around) {
+  * {
+    transition-delay: 0s;
+    transition-duration: var($variable);
+  }
+  > g {
+    > circle {
+      transform: scale(1.4);
+    }
+    g {
+      circle {
+        transform: scale(0);
+        transition-duration: calc(var($variable) * 0.4);
+      }
+    }
+  }
+  > *:first-child {
+    transform: rotate(-90deg);
+    path {
+      d: path("M-12-14h42v30a1 1 0 00-16 13H0Z");
+    }
+  }
+}
+// Translating the clip path causes issues in chromium browsers so we prefer to animate
+// the path data. When this isn't supported, we fallback to translation
+@supports not (d: path("")) {
+  @include toggledSelector(around) {
+    &:first-child {
+      path {
+        transform: translate3d(-12px, -14px, 0);
+      }
+    }
+  }
+}

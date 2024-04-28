@@ -1,0 +1,55 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(expand)};
+
+@include generic(expand, flip-y);
+
+.theme-toggle__expand {
+  g {
+    circle,
+    path {
+      transform-origin: center;
+      transition: transform calc(var($variable) * 0.65)
+        cubic-bezier(0, 0, 0, 1.25) calc(var($variable) * 0.35);
+    }
+  }
+  :first-child {
+    path {
+      transition-property: transform, d;
+      transition-duration: calc(var($variable) * 0.6);
+      transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
+    }
+  }
+}
+
+@include toggledSelector(expand) {
+  g {
+    circle {
+      transform: scale(1.6);
+      transition-delay: 0s;
+    }
+    path {
+      transform: scale(0.75);
+      transition-delay: 0s;
+    }
+  }
+  :first-child {
+    path {
+      d: path("M0 0h14A1 1 0 0027 12v12H0Z");
+      transition-delay: calc(var($variable) * 0.4);
+      transition-timing-function: cubic-bezier(0, 0, 0, 1.25);
+    }
+  }
+}
+// Translating the clip path causes issues in chromium browsers so we prefer to animate
+// the path data. When this isn't supported, we fallback to translation
+@supports not (d: path("")) {
+  @include toggledSelector(expand) {
+    :first-child {
+      path {
+        transform: translate3d(-5px, 11px, 0);
+      }
+    }
+  }
+}

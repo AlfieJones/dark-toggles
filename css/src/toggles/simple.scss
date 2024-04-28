@@ -1,0 +1,36 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(simple)};
+
+@include generic(simple, flip-y);
+
+.theme-toggle__simple {
+  :first-child {
+    path {
+      transition-property: transform, d;
+      transition-duration: calc(var($variable));
+      transition-timing-function: cubic-bezier(0, 0, 0.15, 1.25);
+    }
+  }
+}
+
+@include toggledSelector(simple) {
+  :first-child {
+    path {
+      d: path("M-18-1h55v37h-55zm32 12a1 1 0 0025 0 1 1 0 00-25 0");
+    }
+  }
+}
+
+// Translating the clip path causes issues in chromium browsers so we prefer to animate
+// the path data. When this isn't supported, we fallback to translation
+@supports not (d: path("")) {
+  @include toggledSelector(simple) {
+    :first-child {
+      path {
+        transform: translate3d(-19px, 5px, 0);
+      }
+    }
+  }
+}

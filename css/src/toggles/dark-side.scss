@@ -1,0 +1,19 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(dark-side)};
+
+@include generic(dark-side, flip-x);
+
+.theme-toggle__dark-side {
+  path {
+    transform-origin: center;
+    transition: transform var($variable) ease;
+  }
+}
+
+@include toggledSelector(dark-side) {
+  path {
+    transform: rotate(180deg);
+  }
+}

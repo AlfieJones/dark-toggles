@@ -1,0 +1,26 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(inner-moon)};
+
+@include generic(inner-moon, flip-y);
+
+.theme-toggle__inner-moon {
+  path {
+    transform-origin: center;
+    transition: transform var(#{$variable}) cubic-bezier(0, 0, 0.15, 1.25);
+  }
+  circle {
+    transition: transform calc(var(#{$variable}) / 1.5)
+      cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@include toggledSelector(inner-moon) {
+  path {
+    transform: rotate(180deg);
+  }
+  circle {
+    transform: translate3d(15%, 0, 0);
+  }
+}

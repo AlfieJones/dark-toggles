@@ -1,0 +1,25 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(within)};
+
+@include generic(within, flip-y);
+
+.theme-toggle__within * {
+  transform-origin: center;
+  transition: transform calc(var($variable)) cubic-bezier(0, 0, 0, 1.25);
+}
+
+@include toggledSelector(within) {
+  .theme-toggle__within__circle {
+    transform: scale(1.5);
+  }
+  .theme-toggle__within__inner {
+    transform: translate3d(3px, -3px, 0) scale(1.2);
+  }
+  g {
+    path {
+      transform: scale(0.65);
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "extends": "@theme-toggles/tsconfig/base.json",
+  "include": ["."],
+  "exclude": ["dist", "bin", "build", "node_modules"]
+}

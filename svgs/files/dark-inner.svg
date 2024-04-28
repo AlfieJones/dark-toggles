@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="theme-toggle__dark-inner"
+  height="1em" width="1em"
+  viewBox="0 0 24 24">
+  <g fill="currentColor">
+    <path
+      d="M12 1A1 1 0 0012 23 1 1 0 0012 1L12 4A1 1 0 0112 20L12 17A1 1 0 0112 7Z" />
+    <path
+      d="M12 7 12 17A1 1 0 0012 7Z" />
+  </g>
+</svg>

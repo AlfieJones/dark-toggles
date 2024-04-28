@@ -1,0 +1,59 @@
+---
+
+import * as SVGs from "@theme-toggles/svgs"
+import * as CSS from "@theme-toggles/css"
+import {format} from "prettier"
+
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components'
+import { getButtonHTML } from "../generators/html"
+
+type Toggle = keyof typeof SVGs
+
+interface Props {
+  toggle: Toggle
+  type: "html" | "react"
+  variant: "base" | "checkbox"
+}
+
+
+const { toggle, type, variant } = Astro.props
+
+const lang = type === "html" ? "html" : "tsx"
+
+const cssSelector = toggle + variant.charAt(0).toUpperCase() + variant.slice(1)
+
+const css = await format(CSS[cssSelector as keyof typeof CSS], { parser: "css" })
+
+let code = ""
+
+if (type === "html") {
+  switch (variant) {
+    case "base":
+      code = await getButtonHTML(toggle)
+      break
+    case "checkbox":
+      code = await getButtonHTML(toggle)
+      break
+  }
+}
+
+---
+
+<div>
+  <label for="location" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Component</label>
+  <select id="location" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+    <option>Button</option>
+    <option>Div</option>
+    <option>Checkbox</option>
+  </select>
+</div>
+
+<Tabs>
+    <TabItem label="HTML">
+        <Code code={code} lang={lang}  />
+
+    </TabItem>
+    <TabItem label="CSS">
+        <Code code={css} lang={"css"}  />
+    </TabItem>
+</Tabs>

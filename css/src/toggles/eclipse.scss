@@ -1,0 +1,51 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(eclipse)};
+
+@include generic(eclipse, flip-y);
+
+.theme-toggle__eclipse {
+  * {
+    transition-property: transform, d;
+    transition-duration: var($variable);
+    transition-timing-function: cubic-bezier(0, 0, 0.05, 1.15);
+    transform-origin: center;
+  }
+  g {
+    path {
+      transition-delay: calc(var($variable) * 0.2);
+      transition-duration: calc(var($variable) * 0.8);
+    }
+  }
+}
+
+@include toggledSelector(eclipse) {
+  clipPath {
+    path {
+      d: path("M-20 0h48v24h-48zm25 12a1 1 0 0014 0 1 1 0 00-14 0");
+    }
+  }
+  g {
+    circle {
+      transform: scale(1.6);
+    }
+    path {
+      transition-delay: 0;
+      transition-duration: var($variable);
+      transform: scale(0.5);
+    }
+  }
+}
+
+// Translating the clip path causes issues in chromium browsers so we prefer to animate
+// the path data. When this isn't supported, we fallback to translation
+@supports not (d: path("")) {
+  @include toggledSelector(eclipse) {
+    clipPath {
+      path {
+        transform: translate3d(-32px, 0, 0);
+      }
+    }
+  }
+}

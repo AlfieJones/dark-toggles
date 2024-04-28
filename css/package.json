@@ -1,0 +1,25 @@
+{
+    "name": "@theme-toggles/css",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "tsx ./build.ts"
+    },
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "devDependencies": {
+        "@theme-toggles/tsconfig": "workspace:*",
+        "@types/node": "^20.12.7",
+        "esbuild": "^0.20.2",
+        "lightningcss": "^1.24.1",
+        "node-sass": "^9.0.0",
+        "prettier": "^3.2.5",
+        "sass": "^1.57.1",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.7.3"
+    },
+    "dependencies": {}
+}

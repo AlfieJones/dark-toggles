@@ -1,0 +1,9 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import HtmlCode from '../components/htmlCode.astro';
+---
+
+<StarlightPage frontmatter={{ title: 'Toggle', template: "splash" }} >
+  <p>This is a custom page with a custom component:</p>
+  <HtmlCode toggle="classic" type="html" variant="base" />
+</StarlightPage>

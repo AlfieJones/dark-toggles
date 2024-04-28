@@ -1,0 +1,23 @@
+{
+    "name": "@theme-toggles/svgs",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "tsx ./build.ts"
+    },
+    "files": [
+        "dist",
+        "files"
+    ],
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "devDependencies": {
+        "@theme-toggles/tsconfig": "workspace:*",
+        "@types/node": "^20.12.7",
+        "esbuild": "^0.20.2",
+        "prettier": "^3.2.5",
+        "tsx": "^4.7.3",
+        "ts-node": "^10.9.2"
+    },
+    "dependencies": {}
+}

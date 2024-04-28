@@ -1,0 +1,22 @@
+@import "./../variables.scss";
+@import "./../utils.scss";
+
+$variable: #{getVar(horizon)};
+
+@include generic(horizon, flip-x);
+
+.theme-toggle__horizon {
+  g {
+    path {
+      transition: transform var(#{$variable}) cubic-bezier(0, 0, 0.15, 1);
+    }
+  }
+}
+
+@include toggledSelector(horizon) {
+  g {
+    path {
+      transform: translate3d(0, 50%, 0);
+    }
+  }
+}

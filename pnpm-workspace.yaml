@@ -1,3 +1,7 @@
-packages: 
+packages:
   - "packages/*"
   - "website"
+  - "website3"
+  - "configs/*"
+  - "svgs"
+  - "css"

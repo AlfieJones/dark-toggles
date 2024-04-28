@@ -1,0 +1,19 @@
+// Variables to configure the toggles
+
+// The selector used to change the toggle styles to toggled
+$toggledClass: ".theme-toggle--toggled";
+// The selector used to change the toggle styles to untoggled
+$untoggledClass: ".theme-toggle--untoggled";
+// The global selector used to change the toggle styles to dark
+$globalToggleClass: ".dark";
+// The selector used to change the toggle styles
+$reverseClass: ".theme-toggle--reversed";
+// The selector used to disabled prefers motion
+$forceMotionClass: ".theme-toggle--force-motion";
+// Total duration of each animation
+$duration: 500ms;
+
+// Change which elements we generate styles for
+$button: true !default;
+$div: true !default;
+$checkbox: false !default;

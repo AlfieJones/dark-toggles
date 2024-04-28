@@ -1,0 +1,52 @@
+@import "variables.scss";
+
+@function getVar($name) {
+  @return --theme-toggle__#{$name}--duration;
+}
+
+%flip-y {
+  transform: scale(-1, 1);
+}
+
+%flip-x {
+  transform: scale(1, -1);
+}
+
+@mixin generic($name, $reverseType) {
+  .theme-toggle {
+    #{getVar($name)}: $duration;
+    &#{$reverseClass} {
+      .theme-toggle__#{$name} {
+        @if $reverseType == flip-x {
+          @extend %flip-x;
+        } @else if $reverseType == flip-y {
+          @extend %flip-y;
+        }
+      }
+    }
+  }
+}
+
+@mixin toggledSelector($name) {
+  @if ($button or $div) and (not $checkbox) {
+    #{$globalToggleClass} .theme-toggle:not(#{$untoggledClass}),
+    #{$toggledClass}.theme-toggle {
+      .theme-toggle__#{$name} {
+        @content;
+      }
+    }
+  } @else if (not($button or $div)) and $checkbox {
+    .theme-toggle input[type="checkbox"]:checked ~ {
+      .theme-toggle__#{$name} {
+        @content;
+      }
+    }
+  } @else {
+    #{$toggledClass}:not(label).theme-toggle,
+    .theme-toggle input[type="checkbox"]:checked ~ {
+      .theme-toggle__#{$name} {
+        @content;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="theme-toggle__classic" aria-hidden="true"
+   height="1em" width="1em"
+   viewBox="0 0 24 24">
+   <clipPath id="theme-toggle__classic__cutout">
+      <path d="M0 0h25a1 1 0 0010 10v14H0Z" />
+   </clipPath>
+   <g stroke="currentColor" stroke-linecap="round" clip-path="url(#theme-toggle__classic__cutout)">
+      <circle cx="12" cy="12" r="5" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="M12 1.4v2.4" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="m20.3 3.7-2.5 2.5" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="M22.6 12h-2.4" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="M12 22.6v-2.4" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="M1.4 12h2.4" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="m20.3 20.3-2.5-2.5" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="m3.7 20.3 2.5-2.5" paint-order="stroke markers fill" />
+      <path fill="none" stroke-linejoin="round" stroke-miterlimit="0" stroke-width="2"
+         d="m3.7 3.7 2.5 2.5" paint-order="stroke markers fill" />
+   </g>
+</svg>
