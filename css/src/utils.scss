@@ -43,6 +43,7 @@
     }
   } @else {
     #{$toggledClass}:not(label).theme-toggle,
+    #{$globalToggleClass} .theme-toggle:not(#{$untoggledClass}):not(label),
     .theme-toggle input[type="checkbox"]:checked ~ {
       .theme-toggle__#{$name} {
         @content;

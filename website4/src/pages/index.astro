@@ -1,0 +1,144 @@
+---
+import Layout from "../layouts/Layout.astro";
+import * as Toggles from "@theme-toggles/svgs";
+
+function getColorLight() {
+  return (
+    "hsl(" +
+    360 * Math.random() +
+    "," +
+    (25 + 70 * Math.random()) +
+    "%," +
+    (85 + 10 * Math.random()) +
+    "%)"
+  );
+}
+
+function getColorDark() {
+  return (
+    "hsl(" +
+    360 * Math.random() +
+    "," +
+    (25 + 70 * Math.random()) +
+    "%," +
+    (75 + 10 * Math.random()) +
+    "%)"
+  );
+}
+
+const camelToSpaced = (str: string) => str.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase();
+
+const toggles = Object.entries(Toggles).map(([name, svg]) => {
+  const css = `
+  .${name}-color-bg {
+	background-color: ${getColorLight()};
+  }
+  .dark .${name}-color-bg {
+	background-color: ${getColorDark()};
+  }
+  `;
+
+  const displayName = camelToSpaced(name);
+
+  return {
+    name,
+	displayName,
+    svg,
+    css,
+  };
+});
+---
+
+<Layout title="Welcome to Astro.">
+  <main class="relative z-0 max-w-7xl mx-auto">
+    <div class="relative isolate z-0">
+      <div
+        class="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+        aria-hidden="true"
+      >
+        <div
+          class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-blue-600 dark:from-blue-700 to-[#3eadcf] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+        >
+        </div>
+      </div>
+      <div class="py-12 sm:py-32 lg:pb-40">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+          <div class="pt-12 text-center">
+            <h1
+              class="text-4xl font-extrabold tracking-tight text-gray-700 2xs:text-5xl dark:text-white md:text-6xl lg:text-7xl"
+            >
+              <span
+                class="bg-gradient-to-r text-transparent bg-clip-text from-blue-600 to-[#3eadcf] block pb-1 sm:pb-2 md:pb-3"
+                >Implementing theme toggles</span
+              ><span class="block">was never easier</span>
+            </h1>
+            <p
+              class="max-w-md mx-auto mt-5 text-base text-gray-500 dark:text-gray-200 sm:text-lg md:mt-7 md:text-xl md:max-w-3xl"
+            >
+              Theme toggles is a collection of awesome, easy to use, animated
+              toggles; designed for switching between light and dark modes. It's
+              a modular library which aims to provide ample customization where
+              needed. Works great utility CSS frameworks such as Tailwindcss.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        aria-hidden="true"
+      >
+        <div
+          class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-blue-700 to-[#3eadcf] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+          style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+        >
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-18">
+      <h2
+        class="mb-12 text-4xl font-semibold text-center text-gray-700 xs:text-left dark:text-gray-50"
+      >
+        Our toggle collection
+      </h2>
+      <ul
+        class="grid grid-cols-1 justify-items-center xs:justify-items-stretch gap-x-8 gap-y-8 xs:grid-cols-2 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+      >
+        {
+          toggles.map(({ name, svg, css, displayName }) => (
+            <li class="relative w-full max-w-[17rem] rounded-md hover:scale-105 transition-all shadow-md dark:shadow-lg-strong dark:bg-zinc-800 bg-white ">
+              <>
+                <style set:html={css} />
+                <div
+                  class={`rounded-t-md px-4 xs:px-8 py-5 ${name}-color-bg flex items-center justify-center`}
+                >
+                  <label
+                    class="text-gray-900 theme-toggle theme-toggle--force-motion [&>svg]:text-[10rem]"
+                    title="Classic"
+                  >
+                    <input type="checkbox" />
+                    <span class="sr-only">{name}</span>
+                    <Fragment set:html={svg} />
+                  </label>
+                </div>
+                <a href={`/toggles/${name}`}>
+                  <div class="p-2 rounded-b-md">
+                    <>
+                      <h3 class="block text-xl font-bold text-gray-700 truncate dark:text-gray-100 capitalize">
+                        {displayName}
+                      </h3>
+                      <p class="font-semibold text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300">
+                        See the code
+                      </p>
+                    </>
+                  </div>
+                </a>
+              </>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </main>
+</Layout>

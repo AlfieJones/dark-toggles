@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import * as Toggles from "@theme-toggles/svgs";
+import { ToggleCode } from "../../components/ToggleCode";
+
+export function getStaticPaths() {
+  return Object.keys(Toggles).map((toggle) => {
+    return {
+      params: {
+        toggle,
+      },
+    };
+  });
+}
+
+const { toggle } = Astro.params;
+---
+
+<Layout title={toggle}>
+  <ToggleCode framework="html" toggleName={toggle} client:load />
+</Layout>

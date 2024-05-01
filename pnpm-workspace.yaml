@@ -2,6 +2,7 @@ packages:
   - "packages/*"
   - "website"
   - "website3"
+  - "website4"
   - "configs/*"
   - "svgs"
   - "css"

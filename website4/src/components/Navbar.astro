@@ -1,0 +1,174 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+const navLinks: NavLink[] = [
+  { href: "/", label: "Toggles" },
+  { href: "/docs", label: "Documentation" },
+  { href: "https://github.com/AlfieJones/theme-toggles", label: "GitHub" },
+];
+---
+
+<header
+  class="transition backdrop-blur fixed z-10 inset-x-0 top-0 border-b border-transparent"
+>
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+    aria-label="Global"
+  >
+    <div class="flex lg:flex-1">
+      <ThemeToggle />
+    </div>
+    <div class="flex lg:hidden">
+      <button
+        type="button"
+        id="open-nav"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-zinc-700"
+      >
+        <span class="sr-only">Open main menu</span>
+        <svg
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-12">
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class={`text-sm font-semibold leading-6 ${
+              currentPath === href.slice(1)
+                ? "text-zinc-900 dark:text-white"
+                : "text-zinc-500 dark:text-zinc-400"
+            }`}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+     Search 
+    </div>
+  </nav>
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  <div
+    id="mobile-nav"
+    class="lg:hidden hidden h-screen"
+    role="dialog"
+    aria-modal="true"
+  >
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="fixed inset-0 z-10" id="backdrop"></div>
+    <div
+      class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-zinc-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-zinc-900/10"
+    >
+      <div class="flex items-center justify-between">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <h1 class="text-blue-500 dark:text-blue-400 text-2xl  font-bold">
+            Theme Toggles
+          </h1>
+        </a>
+        <button
+          type="button"
+          id="close-nav"
+          aria-controls="mobile-nav"
+          aria-expanded="true"
+          class="-m-2.5 rounded-md p-2.5 text-zinc-700 dark:text-zinc-300"
+        >
+          <span class="sr-only">Close menu</span>
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="mt-6 flow-root">
+        <div class="-my-6">
+          <div class="space-y-2 py-6">
+            {
+              navLinks.map(({ href, label }) => (
+                <a
+                  href={href}
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-zinc-900 dark:text-white hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                >
+                  {label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("scroll", (event) => {
+    const header = document.querySelector("header");
+
+    const scrolledClasses = [
+      "dark:bg-zinc-900/75",
+      "bg-white/75",
+      "dark:border-zinc-800",
+      "border-zinc-200",
+    ];
+    const topClasses = ["border-transparent"];
+    if (scrollY > 20) {
+      header?.classList.add(...scrolledClasses);
+      header?.classList.remove(...topClasses);
+    } else {
+      header?.classList.remove(...scrolledClasses);
+      header?.classList.add(...topClasses);
+    }
+  });
+
+  onscroll = (event) => {};
+</script>
+
+<script>
+  const openNav = document.getElementById("open-nav");
+  const closeNav = document.getElementById("close-nav");
+  const mobileNav = document.getElementById("mobile-nav");
+  const backdrop = document.getElementById("backdrop");
+
+  const handleClick = () => {
+    const expanded = openNav?.getAttribute("aria-expanded") === "true";
+    openNav?.setAttribute("aria-expanded", String(!expanded));
+    closeNav?.setAttribute("aria-expanded", String(expanded));
+    mobileNav?.classList.toggle("hidden");
+  };
+
+  openNav?.addEventListener("click", handleClick);
+  closeNav?.addEventListener("click", handleClick);
+  backdrop?.addEventListener("click", handleClick);
+</script>

@@ -1,59 +1,103 @@
 ---
+import * as SVGs from "@theme-toggles/svgs";
+import * as CSS from "@theme-toggles/css";
+import { format } from "prettier";
 
-import * as SVGs from "@theme-toggles/svgs"
-import * as CSS from "@theme-toggles/css"
-import {format} from "prettier"
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { getButtonHTML } from "../generators/html";
 
-import { Code, TabItem, Tabs } from '@astrojs/starlight/components'
-import { getButtonHTML } from "../generators/html"
-
-type Toggle = keyof typeof SVGs
+type Toggle = keyof typeof SVGs;
 
 interface Props {
-  toggle: Toggle
-  type: "html" | "react"
-  variant: "base" | "checkbox"
+  toggle: Toggle;
+  type: "html" | "react";
+  variant: "base" | "checkbox";
 }
 
+const { toggle, type, variant } = Astro.props;
 
-const { toggle, type, variant } = Astro.props
+const lang = type === "html" ? "html" : "tsx";
 
-const lang = type === "html" ? "html" : "tsx"
+const cssSelector = toggle + variant.charAt(0).toUpperCase() + variant.slice(1);
 
-const cssSelector = toggle + variant.charAt(0).toUpperCase() + variant.slice(1)
+const css = await format(CSS[cssSelector as keyof typeof CSS], {
+  parser: "css",
+});
 
-const css = await format(CSS[cssSelector as keyof typeof CSS], { parser: "css" })
-
-let code = ""
+let code = "";
 
 if (type === "html") {
   switch (variant) {
     case "base":
-      code = await getButtonHTML(toggle)
-      break
+      code = await getButtonHTML(toggle);
+      break;
     case "checkbox":
-      code = await getButtonHTML(toggle)
-      break
+      code = await getButtonHTML(toggle);
+      break;
   }
 }
-
 ---
 
-<div>
+<!-- <div class="not-content">
+  <div class="w-56 py-12">
+    <div class="flex items-center justify-between">
+      <h2 class="text-sm font-medium leading-6 text-gray-900 dark:text-white">
+        Component
+      </h2>
+      <a
+        href="#"
+        class="text-sm font-medium leading-6 text-indigo-600 hover:text-indigo-500"
+        >Accessability info</a
+      >
+    </div>
+
+    <fieldset class="mt-2">
+      <legend class="sr-only">Choose a memory option</legend>
+      <div class="grid grid-cols-3 gap-3">
+        {
+          ["button", "div", "checkbox"].map((toggle) => (
+            <label class="flex items-center justify-center rounded-md py-3 px-3 text-sm font-semibold uppercase sm:flex-1 cursor-pointer focus:outline-none">
+              <input
+                type="radio"
+                name="memory-option"
+                value="4 GB"
+                class="sr-only"
+                aria-labelledby="memory-option-0-label"
+              />
+              <span id="memory-option-0-label">{toggle}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+  </div> -->
+
+  <!-- <div>
   <label for="location" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Component</label>
-  <select id="location" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+  <select id="location" name="location" class="mt-2 block rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 dark:text-white ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
     <option>Button</option>
     <option>Div</option>
     <option>Checkbox</option>
   </select>
-</div>
+</div> -->
 
-<Tabs>
+  <Tabs>
     <TabItem label="HTML">
-        <Code code={code} lang={lang}  />
-
+      <Code code={code} lang={lang} />
     </TabItem>
     <TabItem label="CSS">
-        <Code code={css} lang={"css"}  />
+      <Code code={css} lang={"css"} />
     </TabItem>
-</Tabs>
+
+    <!-- <div>
+      <div class="bg-gray-700 p-2 justify-end flex absolute z-10 top-0">
+        <label for="location" class="sr-only">Framework</label>
+        <select id="location" name="location" class="px-2 py-1 rounded">
+          <option>Button</option>
+          <option>Div</option>
+          <option>Checkbox</option>
+        </select>
+      </div>
+    </div> -->
+  </Tabs>
+<!-- </div> -->

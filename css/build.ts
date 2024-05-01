@@ -103,14 +103,27 @@ async function generateIndexTs() {
 }
 
 async function generateCSS() {
+  let bundle = "";
+
   for (const variant of variants) {
     await mkdir(`./dist/${variant}`, { recursive: true });
     for (const toggle of files) {
       const css = await generateToggleVariantCSS(toggle, variant);
+      if (variant === "all") bundle += css + "\n";
       await writeFile(`./dist/${variant}/${toggle}.css`, css);
       await generateTSExport(toggle, variant, css);
     }
   }
+
+  const compiledBundle = new TextDecoder().decode(
+    transform({
+      code: new TextEncoder().encode(bundle),
+      filename: "bundle.css",
+      minify: true,
+    }).code
+  );
+
+  await writeFile(`./dist/bundle.css`, compiledBundle);
 
   await generateIndexTs();
 }
