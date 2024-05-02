@@ -8,10 +8,7 @@ export interface ToggleProps
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >,
-    | "onClick"
-    | "placeholder"
-    | "onPointerEnterCapture"
-    | "onPointerLeaveCapture"
+    "onClick"
   > {
   toggled?: boolean;
   toggle?: Dispatch<SetStateAction<boolean>>;
@@ -20,4 +17,11 @@ export interface ToggleProps
   forceMotion?: boolean;
   idPrefix?: string;
   onToggle?: (toggled: boolean) => void;
+  placeholder?: string | undefined;
+  onPointerEnterCapture?:
+    | React.PointerEventHandler<HTMLButtonElement>
+    | undefined;
+  onPointerLeaveCapture?:
+    | React.PointerEventHandler<HTMLButtonElement>
+    | undefined;
 }
