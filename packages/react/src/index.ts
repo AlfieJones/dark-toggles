@@ -8,7 +8,10 @@ export interface ToggleProps
       React.ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >,
-    "onClick"
+    | "onClick"
+    | "placeholder"
+    | "onPointerEnterCapture"
+    | "onPointerLeaveCapture"
   > {
   toggled?: boolean;
   toggle?: Dispatch<SetStateAction<boolean>>;
