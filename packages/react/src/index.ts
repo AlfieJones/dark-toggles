@@ -17,4 +17,11 @@ export interface ToggleProps
   forceMotion?: boolean;
   idPrefix?: string;
   onToggle?: (toggled: boolean) => void;
+  placeholder?: string | undefined;
+  onPointerEnterCapture?:
+    | React.PointerEventHandler<HTMLButtonElement>
+    | undefined;
+  onPointerLeaveCapture?:
+    | React.PointerEventHandler<HTMLButtonElement>
+    | undefined;
 }
